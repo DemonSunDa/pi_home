@@ -138,40 +138,54 @@ fi
 ################################################################
 # PS1 with fancy_ps1.sh
 ################################################################
-# source ~/Documents/bashrc_script/fancy_ps1.sh
-# ## Bash provides an environment variable called PROMPT_COMMAND. 
-# ## The contents of this variable are executed as a regular Bash command 
-# ## just before Bash displays a prompt. 
-# ## We want it to call our own command to truncate PWD and store it in NEW_PWD
-# PROMPT_COMMAND=bash_prompt_command
+source ~/Documents/bashrc_script/fancy_ps1.sh
+## Bash provides an environment variable called PROMPT_COMMAND. 
+## The contents of this variable are executed as a regular Bash command 
+## just before Bash displays a prompt. 
+## We want it to call our own command to truncate PWD and store it in NEW_PWD
+PROMPT_COMMAND=bash_prompt_command
 
-# ## Call bash_promnt only once, then unset it (not needed any more)
-# ## It will set $PS1 with colors and relative to $NEW_PWD, 
-# ## which gets updated by $PROMT_COMMAND on behalf of the terminal
-# bash_prompt
-# # unset bash_prompt
+## Call bash_promnt only once, then unset it (not needed any more)
+## It will set $PS1 with colors and relative to $NEW_PWD, 
+## which gets updated by $PROMT_COMMAND on behalf of the terminal
+bash_prompt
+# unset bash_prompt
 
+################################################################
+# Prompt theme with oh-my-posh
+################################################################
+case "$TERM" in
+    xterm-color|*-256color) eval "$(oh-my-posh init bash  --config '~/Documents/omp_theme/mytheme.omp.json')";;
+esac
+
+################################################################
+# DEMONPI SETTING
+################################################################
+export PATH=$PATH:/home/demonpi/.local/bin
+export LANG=en_GB.UTF-8
+export LC_ALL=en_GB.UTF-8
+
+# Use Vi as defualt editor
+export VISUAL=vi
+export EDITOR="$VISUAL"
+export SUDO_EDITOR="$VISUAL"
+
+export MYSCRIPT="/home/$USER/my_script"
+export MYSCRIPTLIB="${MYSCRIPT}/lib"
+
+alias sc="source ~/.bashrc"
+
+alias svi="sudoedit"
+alias smart0="sudo nvme smart-log /dev/nvme0n1"
+alias media_sync="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/cop /media/demonpi/Share4T/MoviesC"
 
 ################################################################
 # DEMONPI FUNCTION
 ################################################################
-NO_FORMAT="\033[0m"
+. ${MYSCRIPTLIB}/color_lib.sh
+. ${MYSCRIPTLIB}/print_lib.sh
 
-GRAY_BOLD="\033[1;90m"
-
-BLACK_BOLD="\033[1;38;5;0m"
-RED_BOLD="\033[1;38;5;1m"
-GREEN_BOLD="\033[1;38;5;2m"
-CYAN_BOLD="\033[1;38;5;87m"
-WHITE_BOLD="\033[1;38;5;15m"
-
-BLUE_BOLD="\033[1;38;5;74m"
-TOXIC_GREEN_BOLD="\033[1;38;5;118m"
-ORANGE_BOLD="\033[1;38;5;208m"
-
-CC1_BOLD="\033[1;48;2;105;121;16;2;255;255;255m\]"
-
-source ~/Documents/bashrc_script/my_func.sh
+. ${MYSCRIPTLIB}/my_func_lib.sh
 
 # Proxy with Clash-Verge
 my_clash_verge_proxy="http://127.0.0.1:7897"
@@ -194,7 +208,7 @@ function set_proxy {
 
     if ${update_docker_proxy}; then
         sudo mv ~/proxy.conf /etc/systemd/system/docker.service.d/proxy.conf
-        echo -e "${RED_BOLD}RESTARTING DOCKER FOR PROXY${NO_FORMAT}"
+        echo -e "${L_FNRED}RESTARTING DOCKER FOR PROXY${L_NC}"
         sudo systemctl daemon-reload
         sudo systemctl restart docker
     else
@@ -205,32 +219,12 @@ function set_proxy {
 function unset_proxy {
     unset https_proxy http_proxy
     sudo rm /etc/systemd/system/docker.service.d/proxy.conf
-    echo -e "${RED_BOLD}RESTARTING DOCKER${NO_FORMAT}"
+    echo -e "${L_FNRED}RESTARTING DOCKER${L_NC}"
     sudo systemctl daemon-reload
     sudo systemctl restart docker
 }
 
 ################################################################
-# DEMONPI SETTING
+# DEMONPI STARTUP
 ################################################################
-export PATH=$PATH:/home/demonpi/.local/bin
-export LANG=en_GB.UTF-8
-export LC_ALL=en_GB.UTF-8
-
-# Use Vi as defualt editor
-export VISUAL=vi
-export EDITOR="$VISUAL"
-export SUDO_EDITOR="$VISUAL"
-
-alias sc="source ~/.bashrc"
-alias upa="sudo apt upgrade && sudo apt update"
-
-alias svi="sudoedit"
-alias smart0="sudo nvme smart-log /dev/nvme0n1"
-
 set_proxy
-
-################################################################
-# Prompt theme with oh-my-posh
-################################################################
-eval "$(oh-my-posh init bash  --config '~/Documents/omp_theme/mytheme.omp.json')"
