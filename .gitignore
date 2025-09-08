@@ -1,1 +1,148 @@
-.ssh
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.settings/
+bin/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# log
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# runtime
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# dependency
+node_modules/
+jspm_packages/
+
+# cache
+.npm
+.eslintcache
+
+# build
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# env var
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# coverage
+coverage/
+*.lcov
+
+# pacakge management
+yarn-error.log
+.npm/
+.yarn-integrity
+
+# temp
+.tmp/
+.temp/
+
+# system
+*.sys
+
+# executable
+*.exe
+*.dll
+*.so
+*.dylib
+
+# archive
+*.zip
+*.tar.gz
+*.tgz
+
+# document
+*.doc
+*.docx
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# JavaScript/Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ruby
+*.gem
+.bundle/
+.ruby-version
+.ruby-gemset
+
+# Go
+bin/
+pkg/
+
+# Android
+*.apk
+*.ap_
+*.aab
+
+# iOS
+*.ipa
+*.xcuserstate
+
+# dir
+.ssh/
+
+# keep override
+# !.gitkeep
+# !config.example.json
+
