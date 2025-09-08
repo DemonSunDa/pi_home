@@ -1,3 +1,28 @@
 [user]
 	email = demonsd98@outlook.com
 	name = demonpi
+[core]
+    editor = vim
+    whitespace = fix,-indent-with-no-tab,trailing-space
+[color]
+    ui = auto
+[color "branch"]
+    current = yellow bold
+    local = green bold
+    remote = cyan bold
+[color "diff"]
+    meta = yellow bold
+    flag = megenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+# Customise following the format "textColour backgroundColour effect"
+# Colours: normal, black, red, green, yellow, blue, magenta, cyan, white
+# Effect: bold, dim, ul, blink, reverse
+[alias]
+    br = branch
+    st = status
