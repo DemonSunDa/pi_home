@@ -152,13 +152,6 @@ bash_prompt
 # unset bash_prompt
 
 ################################################################
-# Prompt theme with oh-my-posh
-################################################################
-case "$TERM" in
-    xterm-color|*-256color) eval "$(oh-my-posh init bash  --config '~/Documents/omp_theme/mytheme.omp.json')";;
-esac
-
-################################################################
 # DEMONPI SETTING
 ################################################################
 export PATH=$PATH:/home/demonpi/.local/bin
@@ -227,4 +220,14 @@ function unset_proxy {
 ################################################################
 # DEMONPI STARTUP
 ################################################################
+neofetch
 set_proxy
+
+
+
+################################################################
+# Prompt theme with oh-my-posh
+################################################################
+case "$TERM" in
+    xterm-color|*-256color) eval "$(oh-my-posh init bash  --config '~/Documents/omp_theme/mytheme.omp.json')";;
+esac

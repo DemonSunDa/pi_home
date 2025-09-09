@@ -143,6 +143,7 @@ pkg/
 # ignore
 .bash_history
 .bash_logout
+.config
 .cups
 .lesshst
 .local
