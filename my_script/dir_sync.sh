@@ -33,7 +33,7 @@ if [[ ! -d "${DEST_DIR}" ]]; then
     exit 1
 fi
 
-if [ $# -eq 0 ]; then
+if [ $# -eq 2 ]; then
     RSYNC_CMD="rsync -avh -P --progress --delete"
 else
     RSYNC_CMD="rsync -avh -P --progress --dry-run --delete"
