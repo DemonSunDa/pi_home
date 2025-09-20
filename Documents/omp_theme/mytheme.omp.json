@@ -87,10 +87,22 @@
           },
           "leading_diamond": "\ue0b2",
           "trailing_diamond": "<transparent,#ffffff>\ue0b2</>",
-          "template": "\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
+          "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "foreground": "#000000",
           "background": "#ffffff",
           "type": "node",
+          "style": "diamond"
+        },
+        {
+          "properties": {
+            "home_enabled": true
+          },
+          "leading_diamond": "\ue0b2",
+          "trailing_diamond": "<transparent,#306998>\ue0b2</>",
+          "template": " <#FFD43B>\ue235 {{ .Full }}({{ .Venv }}) ",
+          "foreground": "#100e23",
+          "background": "#306998",
+          "type": "python",
           "style": "diamond"
         },
         {

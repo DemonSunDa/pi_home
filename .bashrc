@@ -139,14 +139,14 @@ fi
 # PS1 with fancy_ps1.sh
 ################################################################
 source ~/Documents/bashrc_script/fancy_ps1.sh
-## Bash provides an environment variable called PROMPT_COMMAND. 
-## The contents of this variable are executed as a regular Bash command 
-## just before Bash displays a prompt. 
+## Bash provides an environment variable called PROMPT_COMMAND.
+## The contents of this variable are executed as a regular Bash command
+## just before Bash displays a prompt.
 ## We want it to call our own command to truncate PWD and store it in NEW_PWD
 PROMPT_COMMAND=bash_prompt_command
 
 ## Call bash_promnt only once, then unset it (not needed any more)
-## It will set $PS1 with colors and relative to $NEW_PWD, 
+## It will set $PS1 with colors and relative to $NEW_PWD,
 ## which gets updated by $PROMT_COMMAND on behalf of the terminal
 bash_prompt
 # unset bash_prompt
@@ -163,14 +163,14 @@ export VISUAL=vi
 export EDITOR="$VISUAL"
 export SUDO_EDITOR="$VISUAL"
 
-export MYSCRIPT="/home/$USER/my_script"
+export MYSCRIPT="${HOME}/my_script"
 export MYSCRIPTLIB="${MYSCRIPT}/lib"
 
 alias sc="source ~/.bashrc"
 
 alias svi="sudoedit"
 alias smart0="sudo nvme smart-log /dev/nvme0n1"
-alias media_sync="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/cop /media/demonpi/Share4T/MoviesC"
+alias media_sync="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/copied /media/demonpi/Share4T/MoviesC"
 
 ################################################################
 # DEMONPI FUNCTION
@@ -223,6 +223,20 @@ function unset_proxy {
 neofetch
 set_proxy
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/demonpi/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/demonpi/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/demonpi/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/demonpi/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
 
 ################################################################

@@ -143,19 +143,26 @@ pkg/
 # ignore
 .bash_history
 .bash_logout
+.conda
 .config
 .cups
+.dmrc
+.dotnet
 .lesshst
 .local
 .ssh
 .sudo_as_admin*
 .viminfo
+.vscode-server
+.wget-hsts
 .Xauthority
 .xsession-*
 
 Bookshelf
 Downloads
 Hidden
+miniforge3
+Videos
 
 *_backup
 
