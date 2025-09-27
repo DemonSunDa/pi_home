@@ -34,9 +34,9 @@ if [[ ! -d "${DEST_DIR}" ]]; then
 fi
 
 if [ $# -eq 2 ]; then
-    RSYNC_CMD="rsync -avh -P --progress --delete"
+    RSYNC_CMD="rsync -avh -P --progress --delete-before"
 else
-    RSYNC_CMD="rsync -avh -P --progress --dry-run --delete"
+    RSYNC_CMD="rsync -avh -P --progress --dry-run --delete-before"
 fi
 
 FULL_CMD="$RSYNC_CMD $SRC_DIR $DEST_DIR"

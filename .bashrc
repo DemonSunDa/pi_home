@@ -135,6 +135,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
 ################################################################
 # PS1 with fancy_ps1.sh
 ################################################################
@@ -151,6 +152,7 @@ PROMPT_COMMAND=bash_prompt_command
 bash_prompt
 # unset bash_prompt
 
+
 ################################################################
 # DEMONPI SETTING
 ################################################################
@@ -163,14 +165,17 @@ export VISUAL=vi
 export EDITOR="$VISUAL"
 export SUDO_EDITOR="$VISUAL"
 
+# Custom paths
 export MYSCRIPT="${HOME}/my_script"
 export MYSCRIPTLIB="${MYSCRIPT}/lib"
+export CONDA_ENV="${HOME}/Documents/conda_env"
 
 alias sc="source ~/.bashrc"
-
 alias svi="sudoedit"
 alias smart0="sudo nvme smart-log /dev/nvme0n1"
-alias media_sync="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/copied /media/demonpi/Share4T/MoviesC"
+alias upsmon="python3 ${MYSCRIPT}/UPS_HAT_E/ups.py -c 1"
+alias media_sync="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/cat /media/demonpi/Share4T/MoviesC"
+
 
 ################################################################
 # DEMONPI FUNCTION
@@ -217,6 +222,7 @@ function unset_proxy {
     sudo systemctl restart docker
 }
 
+
 ################################################################
 # DEMONPI STARTUP
 ################################################################
@@ -237,6 +243,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+conda activate exp
 
 
 ################################################################

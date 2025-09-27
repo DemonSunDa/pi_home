@@ -45,22 +45,6 @@
           "style": "diamond"
         },
         {
-          "leading_diamond": "\ue0b2",
-          "template": " \ue266 {{ round .PhysicalPercentUsed .Precision }}% | ",
-          "foreground": "#ffffff",
-          "background": "#516BEB",
-          "type": "sysinfo",
-          "style": "diamond"
-        },
-        {
-          "trailing_diamond": "<transparent,#516BEB>\ue0b2</>",
-          "template": "{{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB ",
-          "foreground": "#ffffff",
-          "background": "#516BEB",
-          "type": "sysinfo",
-          "style": "diamond"
-        },
-        {
           "properties": {
             "style": "roundrock",
             "threshold": 0
@@ -68,8 +52,8 @@
           "leading_diamond": "\ue0b2",
           "trailing_diamond": "\ue0b0",
           "template": " \ue384 {{ .FormattedMs }} ",
-          "foreground": "#d6deeb",
-          "background": "#575656",
+          "foreground": "#FFFFFF",
+          "background": "#516BEB",
           "type": "executiontime",
           "style": "diamond"
         }
@@ -79,6 +63,21 @@
       "type": "prompt",
       "alignment": "right",
       "segments": [
+        {
+          "properties": {
+            "branch_icon": "\ue725 ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "fetch_worktree_count": true
+          },
+          "leading_diamond": "\ue0b2",
+          "trailing_diamond": "<transparent,#17D7A0>\ue0b2</>",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+          "foreground": "#011627",
+          "background": "#17D7A0",
+          "type": "git",
+          "style": "diamond"
+        },
         {
           "properties": {
             "fetch_package_manager": true,
@@ -106,18 +105,19 @@
           "style": "diamond"
         },
         {
-          "properties": {
-            "branch_icon": "\ue725 ",
-            "fetch_status": true,
-            "fetch_upstream_icon": true,
-            "fetch_worktree_count": true
-          },
           "leading_diamond": "\ue0b2",
+          "template": " \ue266 {{ round .PhysicalPercentUsed .Precision }}% | ",
+          "foreground": "#d6deeb",
+          "background": "#575656",
+          "type": "sysinfo",
+          "style": "diamond"
+        },
+        {
           "trailing_diamond": "\ue0b0",
-          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
-          "foreground": "#011627",
-          "background": "#17D7A0",
-          "type": "git",
+          "template": "{{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB ",
+          "foreground": "#d6deeb",
+          "background": "#575656",
+          "type": "sysinfo",
           "style": "diamond"
         }
       ]
