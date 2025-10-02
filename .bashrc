@@ -139,17 +139,17 @@ fi
 ################################################################
 # PS1 with fancy_ps1.sh
 ################################################################
-source ~/Documents/bashrc_script/fancy_ps1.sh
+#source ~/Documents/bashrc_script/fancy_ps1.sh
 ## Bash provides an environment variable called PROMPT_COMMAND.
 ## The contents of this variable are executed as a regular Bash command
 ## just before Bash displays a prompt.
 ## We want it to call our own command to truncate PWD and store it in NEW_PWD
-PROMPT_COMMAND=bash_prompt_command
+#PROMPT_COMMAND=bash_prompt_command
 
 ## Call bash_promnt only once, then unset it (not needed any more)
 ## It will set $PS1 with colors and relative to $NEW_PWD,
 ## which gets updated by $PROMT_COMMAND on behalf of the terminal
-bash_prompt
+#bash_prompt
 # unset bash_prompt
 
 
@@ -250,6 +250,9 @@ conda activate exp
 ################################################################
 # Prompt theme with oh-my-posh
 ################################################################
-case "$TERM" in
-    xterm-color|*-256color) eval "$(oh-my-posh init bash  --config '~/Documents/omp_theme/mytheme.omp.json')";;
-esac
+if [ "$CONNECT_TTY" = "" ]; then # if not connecting via rpi-connect
+    case "$TERM" in
+        xterm-color|*-256color) eval "$(oh-my-posh init bash  --config '~/Documents/omp_theme/mytheme.omp.json')";;
+    esac
+fi
+

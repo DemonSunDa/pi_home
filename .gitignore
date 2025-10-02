@@ -148,8 +148,10 @@ pkg/
 .cups
 .dmrc
 .dotnet
+.ipython
 .lesshst
 .local
+.pki
 .ssh
 .sudo_as_admin*
 .viminfo
