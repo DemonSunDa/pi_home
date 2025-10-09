@@ -1,5 +1,6 @@
 import smbus2 as smbus
 import time
+from datetime import datetime
 import os
 import argparse
 
@@ -19,13 +20,19 @@ while loop_ctrl:
 
     data = bus.read_i2c_block_data(ADDR, 0x02, 0x01)
     if(data[0] & 0x40):
-        print("Fast Charging state")
+        bat_status = "Fast Charging state"
     elif(data[0] & 0x80):
-        print("Charging state")
+        bat_status = "Charging state"
     elif(data[0] & 0x20):
-        print("Discharge state")
+        bat_status = "Discharge state"
     else:
-        print("Idle state")
+        bat_status = "Idle state"
+
+    print(bat_status)
+    # log battery status to file
+    with open(f"{os.getenv("MYSCRIPTLOG", ".")}/battery_status.log", "w", encoding="utf-8") as fo:
+        fo.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        fo.write(f">>> {bat_status}\n")
         
     data = bus.read_i2c_block_data(ADDR, 0x10, 0x06)
     print("VBUS Voltage %5dmV"%(data[0] | data[1] << 8))
@@ -44,6 +51,9 @@ while loop_ctrl:
         print("Run Time To Empty %d min"%(data[8] | data[9] << 8))
     else:
         print("Average Time To Full %d min"%(data[10] | data[11] << 8))
+
+    with open(f"{os.getenv("MYSCRIPTLOG", ".")}/battery_status.log", "a", encoding="utf-8") as fo:
+        fo.write("<<< %d%%\n"%(int(data[4] | data[5] << 8)))
 
     data = bus.read_i2c_block_data(ADDR, 0x30, 0x08)
     V1 = (data[0] | data[1] << 8)

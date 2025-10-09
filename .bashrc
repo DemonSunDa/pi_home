@@ -166,14 +166,17 @@ export EDITOR="$VISUAL"
 export SUDO_EDITOR="$VISUAL"
 
 # Custom paths
+export MYLOGS="${HOME}/logs"
 export MYSCRIPT="${HOME}/my_script"
 export MYSCRIPTLIB="${MYSCRIPT}/lib"
+export MYSCRIPTLOG="${MYSCRIPT}/log"
 export CONDA_ENV="${HOME}/Documents/conda_env"
 
 alias sc="source ~/.bashrc"
 alias svi="sudoedit"
+alias py="python3"
 alias smart0="sudo nvme smart-log /dev/nvme0n1"
-alias upsmon="python3 ${MYSCRIPT}/UPS_HAT_E/ups.py -c 1"
+alias batmon="python3 ${MYSCRIPT}/ups_hat_e/bat_mon.py -c 1"
 alias media_sync="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/cat /media/demonpi/Share4T/MoviesC"
 
 
