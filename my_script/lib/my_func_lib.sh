@@ -56,3 +56,77 @@ function color_palatte {
     done
     echo ""
 }
+
+# Helper to check yt-dlp installation
+function check_yt_dlp {
+    if ! command -v yt-dlp >/dev/null 2>&1; then
+        echo "yt-dlp is not installed. Please install it first."
+        return 1
+    fi
+    return 0
+}
+
+# yt-dlp
+function ytd_aud {
+    if [ -z "$1" ]; then
+        echo "Usage: ytd_aud <url>"
+        return 1
+    fi
+
+    check_yt_dlp || return 1
+
+    if [ -n "$https_proxy" ]; then
+        echo "Using proxy: $https_proxy"
+        yt-dlp --proxy http://127.0.0.1:7897 \
+            --no-check-certificate \
+            --output "%(title)s.%(ext)s" \
+            --embed-thumbnail \
+            --add-metadata \
+            --extract-audio \
+            --audio-format mp3 \
+            --audio-quality 320K \
+            "$1"
+    else 
+        echo "No proxy set. Proceeding without proxy."
+        yt-dlp --no-check-certificate \
+            --output "%(title)s.%(ext)s" \
+            --embed-thumbnail \
+            --add-metadata \
+            --extract-audio \
+            --audio-format mp3 \
+            --audio-quality 320K \
+            "$1"
+    fi
+
+    echo "[Done]"
+}
+
+function ytd_vid {
+    if [ -z "$1" ]; then
+        echo "Usage: ytd_aud <url>"
+        return 1
+    fi
+
+    check_yt_dlp || return 1
+
+    if [ -n "$https_proxy" ]; then
+        echo "Using proxy: $https_proxy"
+        yt-dlp --proxy http://127.0.0.1:7897 \
+            --no-check-certificate \
+            --output "%(title)s.%(ext)s" \
+            --embed-thumbnail \
+            --add-metadata \
+            --merge-output-format mp4 \
+            "$1"
+    else 
+        echo "No proxy set. Proceeding without proxy."
+        yt-dlp --no-check-certificate \
+            --output "%(title)s.%(ext)s" \
+            --embed-thumbnail \
+            --add-metadata \
+            --merge-output-format mp4 \
+            "$1"
+    fi
+
+    echo "[Done]"
+}

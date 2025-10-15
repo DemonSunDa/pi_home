@@ -55,3 +55,6 @@
 [submodule "Documents/fonts"]
 	path = Documents/fonts
 	url = https://github.com/powerline/fonts.git
+[submodule "Documents/qbittorrent_theme/VueTorrent"]
+	path = Documents/qbittorrent_theme/VueTorrent
+	url = git@github.com:VueTorrent/VueTorrent.git
