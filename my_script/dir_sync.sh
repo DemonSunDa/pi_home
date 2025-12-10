@@ -11,18 +11,6 @@
 SRC_DIR=$1
 DEST_DIR=$2
 
-if read -t 10 -p "Sync ${SRC_DIR} to ${DEST_DIR}? [Y/n]" choice; then
-    echo
-else
-    echo
-    print_error "Timeout!"
-    exit 1
-fi
-
-if [ "${choice}" != "Y" ]; then
-    exit 1
-fi
-
 if [[ ! -d "${SRC_DIR}" ]]; then
     print_error "Source path ${SRC_DIR} does not exist!" >&2
     exit 1
@@ -47,6 +35,18 @@ echo -e "Running command: ${L_BOLD}${L_FNBLUE}$RSYNC_CMD${L_NC}"
 echo -e "Source path: ${L_UL}${L_FNBLUE}$SRC_DIR${L_NC}"
 echo -e "Destination path: ${L_UL}${L_FNBLUE}$DEST_DIR${L_NC}"
 echo "================================================================================"
+
+if read -t 10 -p "Sync ${SRC_DIR} to ${DEST_DIR}? [y/n]" choice; then
+    echo
+else
+    echo
+    print_error "Timeout!"
+    exit 1
+fi
+
+if [ "${choice}" != "y" ]; then
+    exit 1
+fi
 
 if ! eval ${RSYNC_CMD} "${SRC_DIR}/" "${DEST_DIR}/"; then
     print_warning "Sync may be incomplete!" >&2

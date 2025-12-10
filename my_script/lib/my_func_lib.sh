@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Show IP
 function myip {
     echo "Internal IP: $(hostname -I | awk '{print $1}')"

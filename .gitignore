@@ -152,6 +152,7 @@ pkg/
 .ipython
 .lesshst
 .local
+.mozilla
 .pki
 .ssh
 .sudo_as_admin*

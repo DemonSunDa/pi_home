@@ -137,20 +137,17 @@ fi
 
 
 ################################################################
-# PS1 with fancy_ps1.sh
+# DEMONPI FUNCTION
 ################################################################
-#source ~/Documents/bashrc_script/fancy_ps1.sh
-## Bash provides an environment variable called PROMPT_COMMAND.
-## The contents of this variable are executed as a regular Bash command
-## just before Bash displays a prompt.
-## We want it to call our own command to truncate PWD and store it in NEW_PWD
-#PROMPT_COMMAND=bash_prompt_command
+. ${MYSCRIPTLIB}/color_lib.sh
+. ${MYSCRIPTLIB}/print_lib.sh
 
-## Call bash_promnt only once, then unset it (not needed any more)
-## It will set $PS1 with colors and relative to $NEW_PWD,
-## which gets updated by $PROMT_COMMAND on behalf of the terminal
-#bash_prompt
-# unset bash_prompt
+. ${MYSCRIPTLIB}/network_lib.sh
+. ${MYSCRIPTLIB}/my_func_lib.sh
+
+# Proxy with Clash-Verge
+# my_clash_verge_proxy="http://127.0.0.1:7890"
+my_clash_verge_proxy="http://127.0.0.1:7897"
 
 
 ################################################################
@@ -177,60 +174,20 @@ alias svi="sudoedit"
 alias py="python3"
 alias smart0="sudo nvme smart-log /dev/nvme0n1"
 alias batmon="python3 ${MYSCRIPT}/ups_hat_e/bat_mon.py -c 1"
-alias media_sync="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/cat /media/demonpi/Share4T/MoviesC"
+alias smbcfg="svi /etc/samba/smb.conf"
 
-
-################################################################
-# DEMONPI FUNCTION
-################################################################
-. ${MYSCRIPTLIB}/color_lib.sh
-. ${MYSCRIPTLIB}/print_lib.sh
-
-. ${MYSCRIPTLIB}/my_func_lib.sh
-
-# Proxy with Clash-Verge
-my_clash_verge_proxy="http://127.0.0.1:7897"
-
-function set_proxy {
-    export https_proxy=${my_clash_verge_proxy}
-    export http_proxy=${my_clash_verge_proxy}
-
-    echo "[Service]" > ~/proxy.conf
-    echo "Environment=\"HTTP_PROXY=$my_clash_verge_proxy\"" >> ~/proxy.conf
-    echo "Environment=\"HTTPS_PROXY=$my_clash_verge_proxy\"" >> ~/proxy.conf
-
-    if [ ! -f "/etc/systemd/system/docker.service.d/proxy.conf" ];then
-        update_docker_proxy=true
-    elif ! $(cmp ~/proxy.conf /etc/systemd/system/docker.service.d/proxy.conf); then
-        update_docker_proxy=true
-    else
-        update_docker_proxy=false
-    fi
-
-    if ${update_docker_proxy}; then
-        sudo mv ~/proxy.conf /etc/systemd/system/docker.service.d/proxy.conf
-        echo -e "${L_FNRED}RESTARTING DOCKER FOR PROXY${L_NC}"
-        sudo systemctl daemon-reload
-        sudo systemctl restart docker
-    else
-        rm ~/proxy.conf
-    fi
-}
-
-function unset_proxy {
-    unset https_proxy http_proxy
-    sudo rm /etc/systemd/system/docker.service.d/proxy.conf
-    echo -e "${L_FNRED}RESTARTING DOCKER${L_NC}"
-    sudo systemctl daemon-reload
-    sudo systemctl restart docker
-}
+alias dir_sync="${MYSCRIPT}/dir_sync.sh"
+alias media_sync1="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/01Share /media/demonpi/Share4T/MoviesC"
+alias media_sync2="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/02Share /media/demonpi/StorageS4T0/MoviesC"
+alias media_synct="yes | media_sync1 t && yes | media_sync2 t"
+alias media_sync="yes | media_sync1 && yes | media_sync2"
 
 
 ################################################################
 # DEMONPI STARTUP
 ################################################################
 neofetch
-set_proxy
+set_proxy ${my_clash_verge_proxy}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -248,6 +205,23 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 conda activate exp
+
+
+################################################################
+# PS1 with fancy_ps1.sh
+################################################################
+#source ~/Documents/bashrc_script/fancy_ps1.sh
+## Bash provides an environment variable called PROMPT_COMMAND.
+## The contents of this variable are executed as a regular Bash command
+## just before Bash displays a prompt.
+## We want it to call our own command to truncate PWD and store it in NEW_PWD
+#PROMPT_COMMAND=bash_prompt_command
+
+## Call bash_promnt only once, then unset it (not needed any more)
+## It will set $PS1 with colors and relative to $NEW_PWD,
+## which gets updated by $PROMT_COMMAND on behalf of the terminal
+#bash_prompt
+# unset bash_prompt
 
 
 ################################################################
