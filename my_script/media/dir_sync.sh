@@ -10,6 +10,7 @@
 
 SRC_DIR=$1
 DEST_DIR=$2
+TIMESTAMP=$(date '+%Y%m%d_%H%M%S')
 
 if [[ ! -d "${SRC_DIR}" ]]; then
     print_error "Source path ${SRC_DIR} does not exist!" >&2
@@ -22,15 +23,15 @@ if [[ ! -d "${DEST_DIR}" ]]; then
 fi
 
 if [ $# -eq 2 ]; then
-    RSYNC_CMD="rsync -avh -P --progress --delete-before"
+    RSYNC_CMD="rsync -avh -P --progress --delete-before --chmod=D755,F644 --log-file=${MYLOGS}/dir_sync_${TIMESTAMP}.log"
 else
-    RSYNC_CMD="rsync -avh -P --progress --dry-run --delete-before"
+    RSYNC_CMD="rsync -avh -P --progress --dry-run --delete-before --chmod=D755,F644 --log-file=${MYLOGS}/dir_sync_${TIMESTAMP}.log"
 fi
 
 FULL_CMD="$RSYNC_CMD $SRC_DIR $DEST_DIR"
 
 echo "================================================================================"
-echo "Sync start: $(date '+%Y-%m-%d %H:%M:%S')"
+echo "Sync start: ${TIMESTAMP}"
 echo -e "Running command: ${L_BOLD}${L_FNBLUE}$RSYNC_CMD${L_NC}"
 echo -e "Source path: ${L_UL}${L_FNBLUE}$SRC_DIR${L_NC}"
 echo -e "Destination path: ${L_UL}${L_FNBLUE}$DEST_DIR${L_NC}"

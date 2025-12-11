@@ -137,20 +137,6 @@ fi
 
 
 ################################################################
-# DEMONPI FUNCTION
-################################################################
-. ${MYSCRIPTLIB}/color_lib.sh
-. ${MYSCRIPTLIB}/print_lib.sh
-
-. ${MYSCRIPTLIB}/network_lib.sh
-. ${MYSCRIPTLIB}/my_func_lib.sh
-
-# Proxy with Clash-Verge
-# my_clash_verge_proxy="http://127.0.0.1:7890"
-my_clash_verge_proxy="http://127.0.0.1:7897"
-
-
-################################################################
 # DEMONPI SETTING
 ################################################################
 export PATH=$PATH:/home/demonpi/.local/bin
@@ -169,18 +155,34 @@ export MYSCRIPTLIB="${MYSCRIPT}/lib"
 export MYSCRIPTLOG="${MYSCRIPT}/log"
 export CONDA_ENV="${HOME}/Documents/conda_env"
 
+
+################################################################
+# DEMONPI FUNCTION
+################################################################
+. ${MYSCRIPTLIB}/color_lib.sh
+. ${MYSCRIPTLIB}/print_lib.sh
+
+. ${MYSCRIPTLIB}/network_lib.sh
+. ${MYSCRIPTLIB}/my_func_lib.sh
+
+. ${MYSCRIPT}/my_test_func.sh
+
+# Proxy with Clash-Verge
+# my_clash_verge_proxy="http://127.0.0.1:7890"
+my_clash_verge_proxy="http://127.0.0.1:7897"
+
 alias sc="source ~/.bashrc"
 alias svi="sudoedit"
+alias cdm="cd /media/demonpi"
+
 alias py="python3"
 alias smart0="sudo nvme smart-log /dev/nvme0n1"
 alias batmon="python3 ${MYSCRIPT}/ups_hat_e/bat_mon.py -c 1"
+
 alias smbcfg="svi /etc/samba/smb.conf"
 
-alias dir_sync="${MYSCRIPT}/dir_sync.sh"
-alias media_sync1="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/01Share /media/demonpi/Share4T/MoviesC"
-alias media_sync2="${MYSCRIPT}/dir_sync.sh /media/demonpi/DavidsBook/Videos/MoviesA/02Share /media/demonpi/StorageS4T0/MoviesC"
-alias media_synct="yes | media_sync1 t && yes | media_sync2 t"
-alias media_sync="yes | media_sync1 && yes | media_sync2"
+alias dir_sync="${MYSCRIPT}/media/dir_sync.sh"
+alias media_sync="${MYSCRIPT}/media/media_sync.sh"
 
 
 ################################################################
