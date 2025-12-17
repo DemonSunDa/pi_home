@@ -23,9 +23,9 @@ if [[ ! -d "${DEST_DIR}" ]]; then
 fi
 
 if [ $# -eq 2 ]; then
-    RSYNC_CMD="rsync -avh -P --progress --delete-before --chmod=D755,F644 --log-file=${MYLOGS}/dir_sync_${TIMESTAMP}.log"
+    RSYNC_CMD="rsync -avh -P --exclude='lost+found' --progress --delete-before --log-file=${MYLOGS}/dir_sync_${TIMESTAMP}.log"
 else
-    RSYNC_CMD="rsync -avh -P --progress --dry-run --delete-before --chmod=D755,F644 --log-file=${MYLOGS}/dir_sync_${TIMESTAMP}.log"
+    RSYNC_CMD="rsync -avh -P --exclude='lost+found' --progress --delete-before --dry-run"
 fi
 
 FULL_CMD="$RSYNC_CMD $SRC_DIR $DEST_DIR"
