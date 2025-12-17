@@ -177,7 +177,7 @@ alias cdm="cd /media/demonpi"
 
 alias py="python3"
 alias smart0="sudo nvme smart-log /dev/nvme0n1"
-alias batmon="python3 ${MYSCRIPT}/ups_hat_e/bat_mon.py -c 1"
+alias batmon="python3 ${MYSCRIPT}/bat_hat_e/bat_mon.py -c 1"
 
 alias smbcfg="svi /etc/samba/smb.conf"
 

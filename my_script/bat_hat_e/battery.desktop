@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=battery
 Comment=My battery
-Exec=/home/demonpi/my_script/ups_hat_e/battery.sh
-Icon=/home/demonpi/my_script/ups_hat_e/images/battery.1.png
+Exec=/home/demonpi/my_script/bat_hat_e/battery.sh
+Icon=/home/demonpi/my_script/bat_hat_e/images/battery.1.png
 Terminal=false
 MultipleArgs=false
 Type=Application

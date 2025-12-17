@@ -6,7 +6,7 @@ import datetime
 
 now = datetime.datetime.now()
 
-os.system("python3 $MYSCRIPT/ups_hat_e/bat_mon.py -c 1 > $MYSCRIPTLOG/battery_status_full.txt")
+os.system("python3 $MYSCRIPT/bat_hat_e/bat_mon.py -c 1 > $MYSCRIPTLOG/battery_status_full.txt")
 
 
 with open(f"{os.getenv("MYSCRIPTLOG", ".")}/battery_status.log", "r") as fi:
