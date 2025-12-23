@@ -30,7 +30,7 @@ while loop_ctrl:
 
     print(bat_status)
     # log battery status to file
-    with open(f"{os.getenv("MYSCRIPTLOG", ".")}/battery_status.log", "w", encoding="utf-8") as fo:
+    with open(f"{os.getenv("MYSCRIPTTMP", ".")}/battery_status.tmp", "w", encoding="utf-8") as fo:
         fo.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         fo.write(f">>> {bat_status}\n")
         
@@ -52,7 +52,7 @@ while loop_ctrl:
     else:
         print("Average Time To Full %d min"%(data[10] | data[11] << 8))
 
-    with open(f"{os.getenv("MYSCRIPTLOG", ".")}/battery_status.log", "a", encoding="utf-8") as fo:
+    with open(f"{os.getenv("MYSCRIPTTMP", ".")}/battery_status.tmp", "w", encoding="utf-8") as fo:
         fo.write("<<< %d%%\n"%(int(data[4] | data[5] << 8)))
 
     data = bus.read_i2c_block_data(ADDR, 0x30, 0x08)

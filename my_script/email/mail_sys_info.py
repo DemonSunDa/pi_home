@@ -34,14 +34,17 @@ def get_system_info():
         with open(f"{os.getenv('MYSCRIPTLOG', '.')}/battery_status_full.txt", "r") as fi:
             power_status = "".join(fi.readlines())
 
-        return hostname, uptime, disk_usage, memory_info, power_status
+        # 获取UPS状态
+        ups_status = subprocess.check_output(['/bin/bash', f"{os.getenv('MYSCRIPT', '.')}/ups/ups_status_check.sh"]).decode()
+
+        return hostname, uptime, disk_usage, memory_info, power_status, ups_status
     except Exception as e:
         return "Unknown", f"Error: {str(e)}", "Failed to gather system info", "Failed to gather system info"
 
 def send_email():
     """发送邮件"""
     # 获取系统信息
-    hostname, uptime, disk_usage, memory_info, power_status = get_system_info()
+    hostname, uptime, disk_usage, memory_info, power_status, ups_status = get_system_info()
 
     # 创建邮件内容
     subject = f"DEMONPI System Monitoring Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
@@ -61,6 +64,9 @@ Memory Info:
 
 Power Status：
 {power_status}
+
+UPS Status:
+{ups_status}
 
 This is an automated message from DEMONPI.
 """

@@ -151,8 +151,10 @@ export SUDO_EDITOR="$VISUAL"
 # Custom paths
 export MYLOGS="${HOME}/logs"
 export MYSCRIPT="${HOME}/my_script"
+export MYSCRIPTCFG="${MYSCRIPT}/config"
 export MYSCRIPTLIB="${MYSCRIPT}/lib"
 export MYSCRIPTLOG="${MYSCRIPT}/log"
+export MYSCRIPTTMP="${MYSCRIPT}/tmp"
 export CONDA_ENV="${HOME}/Documents/conda_env"
 
 
