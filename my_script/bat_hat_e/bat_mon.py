@@ -53,7 +53,7 @@ while loop_ctrl:
         print("Average Time To Full %d min"%(data[10] | data[11] << 8))
 
     with open(f"{os.getenv("MYSCRIPTTMP", ".")}/battery_status.tmp", "w", encoding="utf-8") as fo:
-        fo.write("<<< %d%%\n"%(int(data[4] | data[5] << 8)))
+        fo.write(">>> %d%%\n"%(int(data[4] | data[5] << 8)))
 
     data = bus.read_i2c_block_data(ADDR, 0x30, 0x08)
     V1 = (data[0] | data[1] << 8)

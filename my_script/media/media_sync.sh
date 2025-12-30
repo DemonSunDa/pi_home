@@ -2,7 +2,12 @@
 
 # =============================================================================
 # Synchronizer for media library
-# use rsync
+# using rsync
+# relying on dir_sync.sh
+# Arguments:
+#   $1: 'c' for copy from backup to share, 'i' for import from PiExt to backup
+#   $2: '1', '2', '3', or 'a' for all
+#   $3: (optional) 't' for test mode (dry run)
 # =============================================================================
 
 . ${MYSCRIPTLIB}/color_lib.sh

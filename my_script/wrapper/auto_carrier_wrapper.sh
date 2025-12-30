@@ -10,4 +10,4 @@ source /home/demonpi/miniforge3/etc/profile.d/conda.sh
 conda activate exp
 
 # 执行 Python 脚本
-python3 /home/demonpi/my_script/email/auto_carrier.py 
+python3 /home/demonpi/my_script/email/auto_carrier.py
