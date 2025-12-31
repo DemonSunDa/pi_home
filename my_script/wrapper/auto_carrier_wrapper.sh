@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export MYLOGS="${HOME}/logs"
-export MYSCRIPT="${HOME}/my_script"
+export MYLOGS="/home/demonpi/logs"
+export MYSCRIPT="/home/demonpi/my_script"
 export MYSCRIPTLIB="${MYSCRIPT}/lib"
 export MYSCRIPTLOG="${MYSCRIPT}/log"
 
