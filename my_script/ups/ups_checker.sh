@@ -8,6 +8,12 @@ else
     UPS_NAME="$1"
 fi
 
+if [ -z "$2" ]; then
+    MEDIA_PATH="/media" # default media path
+else
+    MEDIA_PATH="$2"
+fi
+
 ##########################################
 # Logger Setup
 ##########################################
@@ -57,7 +63,7 @@ if [[ "$STATUS" == *"OB"* ]]; then # On Battery
         log_warn "Battery running low!" | wall
         python3 ${MYSCRIPT}/email/auto_carrier.py -f
         log_warn "Unmounting media drives..." | wall
-        ${MYSCRIPT}/media/unmount_all.sh
+        ${MYSCRIPT}/media/unmount_all.sh ${MEDIA_PATH} ${LOG_FILE}
         # sudo shutdown -h +1 "System will shut down in 1 minute" | wall
     elif [ $RUNTIME -lt 720 ]; then
         log_warn "Battery runtime less than 10 minutes" | wall

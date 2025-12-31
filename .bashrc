@@ -167,7 +167,7 @@ export CONDA_ENV="${HOME}/Documents/conda_env"
 . ${MYSCRIPTLIB}/network_lib.sh
 . ${MYSCRIPTLIB}/my_func_lib.sh
 
-. ${MYSCRIPT}/my_test_func.sh
+. ${MYSCRIPT}/example/my_test_func.sh
 
 # Proxy with Clash-Verge
 # my_clash_verge_proxy="http://127.0.0.1:7890"
@@ -179,7 +179,9 @@ alias cdm="cd /media/demonpi"
 
 alias py="python3"
 alias smart0="sudo nvme smart-log /dev/nvme0n1"
+alias iomon="iostat -x 2"
 alias batmon="python3 ${MYSCRIPT}/bat_hat_e/bat_mon.py -c 1"
+alias upsmon="${MYSCRIPT}/ups/ups_status_check.sh tgbox850"
 
 alias smbcfg="svi /etc/samba/smb.conf"
 
