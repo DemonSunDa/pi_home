@@ -1,0 +1,21 @@
+# /etc/systemd/system/ups-checker.service
+[Unit]
+Description=[MyService] for UPS checking and low power shutdown management
+After=nut-server.service nut-driver.service
+Wants=nut-server.service
+ConditionPathExists=/home/demonpi/my_script/wrapper/ups_checker_wrapper.sh
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/bin/bash /home/demonpi/my_script/wrapper/ups_checker_wrapper.sh
+Environment="PATH=/home/demonpi/miniconda3/envs/exp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+StandardOutput=journal
+StandardError=journal
+
+SuccessExitStatus=0 1
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,21 @@
+# /etc/systemd/system/mail-sys-mon.service
+[Unit]
+Description=[MyService] for Monitoring and Sending System Info
+After=network.target
+Wants=mail-sys-mon.timer
+
+[Service]
+Type=oneshot
+User=demonpi
+WorkingDirectory=/home/demonpi/my_script/app
+ExecStart=/bin/bash /home/demonpi/my_script/wrapper/auto_carrier_wrapper.sh
+Environment="PATH=/home/demonpi/miniconda3/envs/exp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+# Environment="MYLOGS=/home/demonpi/logs"
+# Environment="MYSCRIPT=/home/demonpi/my_script"
+# Environment="MYSCRIPTLIB=/home/demonpi/my_script/lib"
+# Environment="MYSCRIPTLOG=/home/demonpi/my_script/log"
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

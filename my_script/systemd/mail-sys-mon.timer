@@ -1,0 +1,11 @@
+# /etc/systemd/system/mail-sys-mon.timer
+[Unit]
+Description=[MyService] to Run system monitor every hour
+Requires=mail-sys-mon.service
+
+[Timer]
+OnCalendar=*-*-* 00/2:30:00
+AccuracySec=1m
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,13 @@
+# /etc/systemd/system/ups-checker.timer
+[Unit]
+Description=[MyService] to Run UPS check every 2 minutes
+Requires=mail-sys-mon.service
+
+[Timer]
+OnCalendar=*:0/2
+RandomizedDelaySec=30
+Persistent=true
+OnBootSec=1min
+
+[Install]
+WantedBy=timers.target
