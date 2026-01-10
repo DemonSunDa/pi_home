@@ -41,35 +41,80 @@ def get_system_info():
     except Exception as e:
         return "Unknown", f"Error: {str(e)}", "Failed to gather system info", "Failed to gather system info"
 
-def send_email():
-    """发送邮件"""
-    # 获取系统信息
+def compose_email():
+    """撰写邮件内容"""
     hostname, uptime, disk_usage, memory_info, power_status, ups_status = get_system_info()
 
-    # 创建邮件内容
     subject = f"DEMONPI System Monitoring Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+#     body = f"""
+# System Monitoring Report
 
-    body = f"""
-System Monitoring Report
+# {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+# Host: {hostname}
+# Up Time: {uptime}
 
-{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-Host: {hostname}
-Up Time: {uptime}
+# Disk Usage:
+# {disk_usage}
 
-Disk Usage:
-{disk_usage}
+# Memory Info:
+# {memory_info}
 
-Memory Info:
-{memory_info}
+# Power Status：
+# {power_status}
 
-Power Status：
-{power_status}
+# UPS Status:
+# {ups_status}
 
-UPS Status:
-{ups_status}
+# This is an automated message from DEMONPI.
+# """
 
-This is an automated message from DEMONPI.
+    body = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">
+                <table width="750" cellpadding="20" cellspacing="0">
+                    <tr>
+                        <td>
+                            <h1 style="color: #333;">System Monitoring Report</h1>
+                            <p>{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+                            <p>Host: {hostname}</p>
+                            <p>Up Time: {uptime}</p>
+                            <h2 style="color: #555;">Disk Usage:</h2>
+                            <pre style="background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd;">{disk_usage}</pre>
+                            <h2 style="color: #555;">Memory Info:</h2>
+                            <pre style="background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd;">{memory_info}</pre>
+                            <h2 style="color: #555;">Power Status：</h2>
+                            <pre style="background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd;">{power_status}</pre>
+                            <h2 style="color: #555;">UPS Status:</h2>
+                            <pre style="background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd;">{ups_status}</pre>
+                            <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+                            <p style="font-size: 12px; color: #999;">Automated message from DEMONPI.</p>
+                            <p></p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
 """
+    
+    with open(f"{os.getenv('MYSCRIPTTMP', '.')}/system_monitoring_report.html", "w") as fi:
+        fi.write(body)
+
+    return subject, body
+
+def send_email():
+    """发送邮件"""
+    # 创建邮件内容
+    subject, body = compose_email()
 
     # 创建邮件对象
     msg = MIMEMultipart()
@@ -78,7 +123,7 @@ This is an automated message from DEMONPI.
     msg['Subject'] = subject
 
     # 添加邮件正文
-    msg.attach(MIMEText(body, 'plain'))
+    msg.attach(MIMEText(body, 'html', 'utf-8'))
 
     try:
         # 连接SMTP服务器并发送

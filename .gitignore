@@ -171,6 +171,7 @@ Storage
 Videos
 
 *_backup
+**/tmp/
 
 # keep override
 # !.gitkeep
